@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Land Use Diversity — Addison, TX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a2e;
+      --paper: #f5f0e8;
+      --accent: #c8440a;
+      --muted: #6b6560;
+      --rule: #d4cfc6;
+      --office: #9b59b6;
+      --residential: #f1c40f;
+      --retail: #2980b9;
+      --hospitality: #e67e22;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 3px solid var(--ink);
+      padding: 3rem 5vw 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .header-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    header h1 span {
+      color: var(--accent);
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 5vw 5rem;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .intro-lead {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    .intro-body {
+      font-size: 0.95rem;
+      color: #3a3530;
+    }
+
+    /* ── STAT CARDS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .stat-card {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.8rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .stat-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.6);
+    }
+
+    .stat-card .desc {
+      margin-top: 0.8rem;
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.85);
+      line-height: 1.5;
+    }
+
+    /* ── FINDINGS ── */
+    .findings {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .finding-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .finding-block p {
+      font-size: 0.92rem;
+      color: #3a3530;
+    }
+
+    /* ── USE BREAKDOWN ── */
+    .use-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .use-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+    }
+
+    .swatch {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .use-pct {
+      margin-left: auto;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── DASHBOARD EMBED ── */
+    .dashboard-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .dashboard-wrapper {
+      border: 1px solid var(--rule);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .dashboard-caption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CONCLUSION ── */
+    .conclusion {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2.5rem 3rem;
+    }
+
+    .conclusion p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      max-width: 780px;
+    }
+
+    .conclusion p strong {
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.5rem 5vw;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .intro, .findings-grid, .stats { grid-template-columns: 1fr; }
+      header { grid-template-columns: 1fr; }
+      .header-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <p class="header-eyebrow">Urban Planning Brief · 2025</p>
+      <h1>Land Use<br/><span>Diversity</span></h1>
+    </div>
+    <div class="header-meta">
+      Addison, TX<br/>
+      vs. Dallas, TX<br/>
+      Data Year: 2025
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <p class="intro-lead">
+        Addison demonstrates exceptional land use diversity — a balanced mix of commercial, residential, and civic uses that sets it apart from its neighboring city of Dallas.
+      </p>
+      <p class="intro-body">
+        Land use diversity is a key indicator of urban vitality. Cities with varied, mixed-use environments tend to generate more economic activity, support walkability, and reduce infrastructure inefficiencies. This report examines Addison's 2025 land use composition and benchmarks it against Dallas, using parcel-level data from the Land Use Diversity dashboard.
+      </p>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">
+        <span class="number">9</span>
+        <span class="label">Uses above 5% share</span>
+        <p class="desc">Addison has nearly twice as many significant land use categories as Dallas, signaling a genuinely mixed urban environment.</p>
+      </div>
+      <div class="stat-card">
+        <span class="number">5</span>
+        <span class="label">Dallas uses above 5%</span>
+        <p class="desc">Dallas's land use is more concentrated, with residential alone consuming over a third of total land area.</p>
+      </div>
+      <div class="stat-card">
+        <span class="number">18%</span>
+        <span class="label">Office — Addison's top use</span>
+        <p class="desc">Office space leads in Addison, reflecting its role as a dense suburban employment hub in the Dallas–Fort Worth metro.</p>
+      </div>
+    </div>
+
+    <!-- FINDINGS -->
+    <section class="findings">
+      <p class="section-label">Key Findings</p>
+      <div class="findings-grid">
+        <div class="finding-block">
+          <h3>Addison: A Balanced Urban Mix</h3>
+          <p>
+            Addison's land use profile is notably even across multiple categories. No single use dominates overwhelmingly. Office (18.1%), Residential (15.5%), and Retail (13.5%) each hold significant shares, followed by Hospitality (10.2%) and Multifamily (8.9%). This reflects intentional planning around Addison's restaurant row, corporate campuses, and walkable town core.
+          </p>
+          <ul class="use-list">
+            <li><span class="swatch" style="background:#9b59b6"></span> Office <span class="use-pct">18.1%</span></li>
+            <li><span class="swatch" style="background:#f1c40f"></span> Residential <span class="use-pct">15.5%</span></li>
+            <li><span class="swatch" style="background:#2980b9"></span> Retail <span class="use-pct">13.5%</span></li>
+            <li><span class="swatch" style="background:#e67e22"></span> Hospitality <span class="use-pct">10.2%</span></li>
+            <li><span class="swatch" style="background:#e74c3c"></span> Multifamily <span class="use-pct">8.9%</span></li>
+            <li><span class="swatch" style="background:#7f8c8d"></span> Industrial <span class="use-pct">5.5%</span></li>
+          </ul>
+        </div>
+        <div class="finding-block">
+          <h3>Dallas: Residential Dominance</h3>
+          <p>
+            In contrast, Dallas is heavily weighted toward residential land use at 35.1%, with a substantial 16.5% share classified as undeveloped land. Industrial (13.6%) and a secondary residential tier round out the top uses. While Dallas's sheer scale demands more residential land, the large undeveloped share suggests ongoing growth pressure and lower land use efficiency compared to Addison.
+          </p>
+          <ul class="use-list">
+            <li><span class="swatch" style="background:#f1c40f"></span> Residential <span class="use-pct">35.1%</span></li>
+            <li><span class="swatch" style="background:#95a5a6"></span> Land (vacant) <span class="use-pct">16.5%</span></li>
+            <li><span class="swatch" style="background:#7f8c8d"></span> Industrial <span class="use-pct">13.6%</span></li>
+            <li><span class="swatch" style="background:#27ae60"></span> Park / Public <span class="use-pct">3.2%</span></li>
+            <li><span class="swatch" style="background:#2980b9"></span> Retail <span class="use-pct">2.7%</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD EMBED -->
+    <section class="dashboard-section">
+      <p class="section-label">Interactive Dashboard</p>
+      <div class="dashboard-wrapper">
+        <div class='tableauPlaceholder' id='viz1774878647845' style='position: relative'>
+          <noscript>
+            <a href='#'><img alt='Land Use Diversity' src='https://public.tableau.com/static/images/La/LandUseDiversity/LandUseDiversity/1_rss.png' style='border: none' /></a>
+          </noscript>
+          <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='LandUseDiversity&#47;LandUseDiversity' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/La/LandUseDiversity/LandUseDiversity/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+          var divElement = document.getElementById('viz1774878647845');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          vizElement.style.width = '1100px';
+          vizElement.style.height = '947px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
+      </div>
+      <p class="dashboard-caption">Source: Land Use Diversity dashboard by Emilio Montalvo, Tableau Public (2025). Use the Year and Comparison City filters to explore different scenarios.</p>
+    </section>
+
+    <!-- CONCLUSION -->
+    <div class="conclusion">
+      <p>
+        Addison's compact geography has fostered a <strong>genuinely diverse land use ecosystem</strong> — one that supports economic resilience, reduces car dependency, and creates the conditions for a vibrant public realm. As Dallas continues to grow, Addison's model of intentional mixed-use planning offers a compelling benchmark for denser, more efficient urban development.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>Land Use Diversity Report · Addison, TX · 2025</span>
+    <span>Data: Tableau Public — Emilio Montalvo</span>
+  </footer>
+
+</body>
+</html>
